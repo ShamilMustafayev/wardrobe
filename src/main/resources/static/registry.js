@@ -10,7 +10,6 @@ $.post("/api/wardrobe/name",
     });
 }
 
-
 function open()
 {
     $.get("/api/wardrobe/open", function(data){
@@ -25,10 +24,19 @@ function close()
     });
 }
 
-function enter()
+function enter(e)
 {
+e.preventDefault();
     $.get("/api/wardrobe/enter", function (data){
+        if (data)
+        {
+            console.log("true");
+            myFunction();
+        }
+        else{
+        console.log("false");
         alert(data);
+        }
     });
 }
 
@@ -46,9 +54,24 @@ function kick()
     });
 }
 
+function myFunction(){
+        $("#Witch").show();
+        $("#Enter").hide();
+    // document.getElementById('Witch').style.visibility = "visible";
+    //document.getElementById('Enter').style.visibility = 'hidden';
+}
+
+function witch()
+{
+    $.get("/api/wardrobe/witch", function(data){
+    alert(data);
+    });
+}
+
 $("#BtnName").click(name);
 $("#Open").click(open);
 $("#Close").click(close);
 $("#Enter").click(enter);
 $("#Leave").click(leave);
 $("#Kick").click(kick);
+$("#Witch").click(witch);

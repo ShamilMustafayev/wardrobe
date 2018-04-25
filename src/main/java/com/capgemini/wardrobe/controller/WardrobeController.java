@@ -38,17 +38,30 @@ public class WardrobeController {
     }
 
     @GetMapping("/enter")
-    public String enterWardrobe() {
+    public boolean enterWardrobe() {
         double chance = ((Math.random() * 100) + 1);
         if (chance >= 80) {
             if (isInWardrobe == false) {
                 isInWardrobe = true;
-                return "You have just entered the Narnia!!!";
+                return this.isInWardrobe;
             } else {
-                return "You are already inside the Narnia! Please leave the Narnia first.";
+                return isInWardrobe;
             }
         } else {
-            return "Unfortunately you couldn't get in :(";
+            return isInWardrobe;
+        }
+    }
+
+    @GetMapping("/witch")
+    public String fightWitch()
+    {
+        double winChance = ((Math.random()*100)+1);
+        if (winChance>=50)
+        {
+            return "You have defeated the witch! Now you get the chance to talk to Aslan!";
+        }
+        else{
+            return "You have lost the fight! Unfortunately you are leaving the Narnia...";
         }
     }
 
