@@ -1,51 +1,54 @@
-var isWardrobeOpen = false;
-var isInWardrobe = false;
-
-function openWardrobe()
+function name()
 {
-    if (isWardrobeOpen==false)
+var name = $("#name").val();
+
+$.post("/api/wardrobe/name",
     {
-        isWardrobeOpen=true;
-        console.log("The wardrobe has been opened.");
-    }
-    else
-    {
-        console.log("The wardrobe is already opened! Please close it first.")
-    }
-}
-function closeWardrobe(){
-        if (isWardrobeOpen==true)
-        {
-            isWardrobeOpen=false;
-            console.log("The wardrobe has been closed.");
-        }
-        else
-        {
-            console.log("The wardrobe has already been closed! Please open it first.")
-        }
+        name: name
+    }, function(data) {
+       alert(data);
+    });
 }
 
 
-function enterWardrobe(){
-        if (isInWardrobe==false)
-        {
-            isInWardrobe=true;
-            console.log("You have just entered the wardrobe.");
-        }
-        else
-        {
-            console.log("You are already inside the wardrobe! Please leave the wardrobe first.")
-        }
+function open()
+{
+    $.get("/api/wardrobe/open", function(data){
+    alert(data);
+    });
 }
 
-function leaveWardrobe(){
-        if (isInWardrobe==true)
-        {
-            isInWardrobe=false;
-            console.log("You have just left the wardrobe.");
-        }
-        else
-        {
-            console.log("You are already outside of the wardrobe! Please enter it first.")
-        }
+function close()
+{
+    $.get("/api/wardrobe/close", function(data) {
+        alert(data);
+    });
 }
+
+function enter()
+{
+    $.get("/api/wardrobe/enter", function (data){
+        alert(data);
+    });
+}
+
+function leave()
+{
+    $.get("/api/wardrobe/leave", function(data){
+        alert(data);
+    });
+}
+
+function kick()
+{
+    $.get("/api/wardrobe/kick", function(data){
+    alert(data);
+    });
+}
+
+$("#BtnName").click(name);
+$("#Open").click(open);
+$("#Close").click(close);
+$("#Enter").click(enter);
+$("#Leave").click(leave);
+$("#Kick").click(kick);
