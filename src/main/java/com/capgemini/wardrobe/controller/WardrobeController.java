@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.*;
 
 public class WardrobeController {
 
+    public boolean isWardrobeOpen = false;
+    public boolean isInWardrobe = false;
+
     @PostMapping("/name")
     public String wardrobeName(String name) {
         return "Your new wardrobe with name " + name + " has been created!";
     }
 
-    public boolean isWardrobeOpen = false;
-    public boolean isInWardrobe = false;
 
     @GetMapping("/open")
     public String openWardrobe() {
@@ -38,11 +39,16 @@ public class WardrobeController {
 
     @GetMapping("/enter")
     public String enterWardrobe() {
-        if (isInWardrobe == false) {
-            isInWardrobe = true;
-            return "You have just entered the wardrobe.";
+        double chance = ((Math.random() * 100) + 1);
+        if (chance >= 80) {
+            if (isInWardrobe == false) {
+                isInWardrobe = true;
+                return "You have just entered the Narnia!!!";
+            } else {
+                return "You are already inside the Narnia! Please leave the Narnia first.";
+            }
         } else {
-            return "You are already inside the wardrobe! Please leave the wardrobe first.";
+            return "Unfortunately you couldn't get in :(";
         }
     }
 
