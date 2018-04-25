@@ -8,12 +8,15 @@
 <h1>My Wardrobe</h1>
 <form id="saveForm">
     Name: <input type = "text" id = "name" required = "required"><br/><br/><br/>
-    <button id="openBtn">Open</button><br/><br/>
-    <button id="closeBtn">Close</button><br/><br/>
-    <button id="getInBtn">Get In</button><br/><br/>
-    <button id="getOutBtn">Get Out</button><br/><br/>
+    <button onclick="openWardrobe()">Open</button><br/><br/>
+    <button onclick="closeWardrobe()">Close</button><br/><br/>
+    <button onclick="enterWardrobe()">Get In</button><br/><br/>
+    <button onclick="leaveWardrobe()">Get Out</button><br/><br/>
     <button id="KickBtn">Kick</button><br/><br/>
 </form>
 
+<shamil id="guests">No guests yet</shamil>
+<script src = "https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="registry.js"></script>
 </body>
 </html>
