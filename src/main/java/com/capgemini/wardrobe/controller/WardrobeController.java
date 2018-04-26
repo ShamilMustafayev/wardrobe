@@ -10,30 +10,31 @@ public class WardrobeController {
 
     public boolean isWardrobeOpen = false;
     public boolean isInWardrobe = false;
+    public boolean winning = false;
 
     @PostMapping("/name")
     public String wardrobeName(String name) {
-        return "Your new wardrobe with name " + name + " has been created!";
+        return name;
     }
 
 
     @GetMapping("/open")
-    public String openWardrobe() {
+    public boolean openWardrobe() {
         if (isWardrobeOpen == false) {
-            isWardrobeOpen = true;
-            return "The wardrobe has been opened.";
+            isWardrobeOpen=true;
+            return isWardrobeOpen;
         } else {
-            return "The wardrobe is already opened! Please close it first.";
+            return false;
         }
     }
 
     @GetMapping("/close")
-    public String closeWardrobe() {
+    public boolean closeWardrobe() {
         if (isWardrobeOpen == true) {
             isWardrobeOpen = false;
-            return "The wardrobe has been closed.";
+            return true;
         } else {
-            return "The wardrobe has already been closed! Please open it first.";
+            return isWardrobeOpen;
         }
     }
 
@@ -43,9 +44,9 @@ public class WardrobeController {
         if (chance >= 80) {
             if (isInWardrobe == false) {
                 isInWardrobe = true;
-                return this.isInWardrobe;
+                return false;
             } else {
-                return isInWardrobe;
+                return true;
             }
         } else {
             return isInWardrobe;
@@ -53,25 +54,23 @@ public class WardrobeController {
     }
 
     @GetMapping("/witch")
-    public String fightWitch()
-    {
-        double winChance = ((Math.random()*100)+1);
-        if (winChance>=50)
-        {
-            return "You have defeated the witch! Now you get the chance to talk to Aslan!";
-        }
-        else{
-            return "You have lost the fight! Unfortunately you are leaving the Narnia...";
+    public boolean fightWitch() {
+        double winChance = ((Math.random() * 100) + 1);
+        if (winChance >= 50) {
+            winning = true;
+            return winning;
+        } else {
+            return false;
         }
     }
 
     @GetMapping("/leave")
-    public String leaveWardrobe() {
+    public boolean leaveWardrobe() {
         if (isInWardrobe == true) {
             isInWardrobe = false;
-            return "You have just left the wardrobe.";
+            return true;
         } else {
-            return "You are already outside of the wardrobe! Please enter it first.";
+            return isInWardrobe;
         }
     }
 
@@ -88,5 +87,19 @@ public class WardrobeController {
                 return "You have hurt your foot!";
             }
         }
+    }
+
+    @GetMapping("/reset")
+    public void reset() {
+        isWardrobeOpen = false;
+        winning = false;
+        isInWardrobe = false;
+    }
+
+    @GetMapping("/aslan")
+    public void aslan() {
+        isWardrobeOpen = false;
+        winning = false;
+        isInWardrobe = false;
     }
 }
